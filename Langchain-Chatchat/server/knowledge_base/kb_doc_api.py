@@ -97,9 +97,10 @@ def search_docs(
                 else:
                     # 若未匹配到相关数据，则对整个数据库中所有文件进行扫描
                     print("*************************")
-                    print("未搜索到文档，没匹配到数据，且没有文档输出")
+                    print("未搜索到文档，没匹配到数据，且没有文档输入，只检索最新一篇文章")
                     print("*************************")
                     doc_details = pd.DataFrame(get_kb_file_details(knowledge_base_name))
+                    file_upload_time = list(doc_details.loc[:]["file_mtime"])
                     all_file_name = list(doc_details.loc[:]["file_name"])
                     if len(all_file_name) >= top_k:
                         for i in range(len(all_file_name)):
@@ -111,19 +112,24 @@ def search_docs(
                     else:
                         # for i in range(len(all_file_name)):
                         #     file_data = kb.list_docs(file_name=all_file_name[i], metadata={})
-                        k = 0
-                        while len(data)< top_k and k < top_k:
-                            for i in range(len(all_file_name)):
-                                file_data = kb.list_docs(file_name=all_file_name[i], metadata={})
-                                for d in file_data:
-                                    if "vector" in d.metadata:
-                                        del d.metadata["vector"]
-                                # 防止出现文档的切片数少于k
-                                try:
-                                    data.append(file_data[k])
-                                except:
-                                    continue
-                            k+=1
+                        #### 针对第一个文件的情况
+                        file_data = kb.list_docs(file_name=all_file_name[file_upload_time.index(max(file_upload_time))], metadata={})
+                        data.extend(file_data)
+
+                        #### 针对所有文件的情况
+                        # k = 0
+                        # while len(data)< top_k and k < top_k:
+                        #     for i in range(len(all_file_name)):
+                        #         file_data = kb.list_docs(file_name=all_file_name[i], metadata={})
+                        #         for d in file_data:
+                        #             if "vector" in d.metadata:
+                        #                 del d.metadata["vector"]
+                        #         # 防止出现文档的切片数少于k
+                        #         try:
+                        #             data.append(file_data[k])
+                        #         except:
+                        #             continue
+                        #     k+=1
     return data,label
 
 
