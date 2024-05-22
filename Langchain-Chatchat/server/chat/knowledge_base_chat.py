@@ -34,9 +34,14 @@ def get_doc_name(knowledge_base_name,query):
     file_suffx_list = []
     for i in range(len(all_file_name)):
         if "/" not in all_file_name[i]:
-            # 当前添加的文件全在samples数据库中，该数据库中有其他文件，所以有此判断
-            file_names_list.append(all_file_name[i].split(".")[0])
-            file_suffx_list.append(all_file_name[i].split(".")[1])
+            if len(all_file_name[i].split(".")) > 2:
+                name = ""
+                for j in range(len(all_file_name[i].split("."))-1):
+                    name = name + all_file_name[i].split(".")[j] + "."
+                file_names_list.append(name.strip("."))
+            else:
+                file_names_list.append(all_file_name[i].split(".")[0])
+            file_suffx_list.append(all_file_name[i].split(".")[-1])
     # 通过连续词的组合匹配书名
     for j in range(len(file_names_list)):
         start = 0
@@ -60,7 +65,6 @@ def get_doc_name(knowledge_base_name,query):
             low = start
             high = low+i
     return result_doc[0],result_doc[1]
-
 async def knowledge_base_chat(query: str = Body(..., description="用户输入", examples=["你好"]),
                               knowledge_base_name: str = Body(..., description="知识库名称", examples=["samples"]),
                               file_names: str=Body(..., description="文件名称(None表示搜库)", examples=["filename1, filename2"]),
