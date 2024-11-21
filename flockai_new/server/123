@@ -1,0 +1,50 @@
+./chat/knowledge_base_chat.py.0426:async def knowledge_base_chat(query: str = Body(..., description="用户输入", examples=["你好"]),
+./chat/knowledge_base_chat.py.0426:    async def knowledge_base_chat_iterator(
+./chat/knowledge_base_chat.py.0426:            prompt_template = get_prompt_template("knowledge_base_chat", "empty")
+./chat/knowledge_base_chat.py.0426:            prompt_template = get_prompt_template("knowledge_base_chat", prompt_name)
+./chat/knowledge_base_chat.py.0426:    return EventSourceResponse(knowledge_base_chat_iterator(query, top_k, history,model_name,prompt_name))
+./chat/knowledge_base_chat.py.old:async def knowledge_base_chat(query: str = Body(..., description="用户输入", examples=["你好"]),
+./chat/knowledge_base_chat.py.old:    async def knowledge_base_chat_iterator(
+./chat/knowledge_base_chat.py.old:            prompt_template = get_prompt_template("knowledge_base_chat", "empty")
+./chat/knowledge_base_chat.py.old:            prompt_template = get_prompt_template("knowledge_base_chat", prompt_name)
+./chat/knowledge_base_chat.py.old:    return EventSourceResponse(knowledge_base_chat_iterator(query, top_k, history,model_name,prompt_name))
+./chat/knowledge_base_chat.py.new:async def knowledge_base_chat(query: str = Body(..., description="用户输入", examples=["你好"]),
+./chat/knowledge_base_chat.py.new:    async def knowledge_base_chat_iterator(
+./chat/knowledge_base_chat.py.new:            prompt_template = get_prompt_template("knowledge_base_chat", "empty")
+./chat/knowledge_base_chat.py.new:            prompt_template = get_prompt_template("knowledge_base_chat", prompt_name)
+./chat/knowledge_base_chat.py.new:    return EventSourceResponse(knowledge_base_chat_iterator(query, top_k, history,model_name,prompt_name))
+Binary file ./chat/__pycache__/knowledge_base_chat.cpython-311.pyc matches
+Binary file ./chat/__pycache__/knowledge_base_chat.cpython-39.pyc matches
+Binary file ./chat/__pycache__/file_chat.cpython-311.pyc matches
+Binary file ./chat/__pycache__/knowledge_base_chat.cpython-310.pyc matches
+./chat/file_chat.py:    async def knowledge_base_chat_iterator() -> AsyncIterable[str]:
+./chat/file_chat.py:            prompt_template = get_prompt_template("knowledge_base_chat", "empty")
+./chat/file_chat.py:            prompt_template = get_prompt_template("knowledge_base_chat", prompt_name)
+./chat/file_chat.py:    return EventSourceResponse(knowledge_base_chat_iterator())
+./chat/knowledge_base_chat.py:async def knowledge_base_chat(query: str = Body(..., description="用户输入", examples=["你好"]),
+./chat/knowledge_base_chat.py:    async def knowledge_base_chat_iterator(
+./chat/knowledge_base_chat.py:            prompt_template = get_prompt_template("knowledge_base_chat", "empty")
+./chat/knowledge_base_chat.py:            prompt_template = get_prompt_template("knowledge_base_chat", prompt_name)
+./chat/knowledge_base_chat.py:    return EventSourceResponse(knowledge_base_chat_iterator(query, top_k, history,model_name,prompt_name))
+Binary file ./__pycache__/utils.cpython-39.pyc matches
+Binary file ./__pycache__/api.cpython-311.pyc matches
+Binary file ./__pycache__/api.cpython-39.pyc matches
+Binary file ./__pycache__/utils.cpython-311.pyc matches
+Binary file ./__pycache__/utils.cpython-310.pyc matches
+Binary file ./__pycache__/api.cpython-310.pyc matches
+./utils.py:    type: "llm_chat","agent_chat","knowledge_base_chat","search_engine_chat"的其中一种，如果有新功能，应该进行加入。
+./api.py:        type: Literal["llm_chat", "knowledge_base_chat", "search_engine_chat", "agent_chat"]=Body("llm_chat", description="模板类型，可选值：llm_chat，knowledge_base_chat，search_engine_chat，agent_chat"),
+./api.py:    from server.chat.knowledge_base_chat import knowledge_base_chat
+./api.py:    app.post("/chat/knowledge_base_chat",
+./api.py:             summary="与知识库对话")(knowledge_base_chat)
+./agent/tools/search_knowledgebase_simple.py:from server.chat.knowledge_base_chat import knowledge_base_chat
+./agent/tools/search_knowledgebase_simple.py:    response = await knowledge_base_chat(query=query,
+./agent/tools/search_knowledgebase_simple.py:                                         prompt_name="knowledge_base_chat",
+Binary file ./agent/tools/__pycache__/search_knowledgebase_complex.cpython-311.pyc matches
+Binary file ./agent/tools/__pycache__/search_knowledgebase_simple.cpython-311.pyc matches
+Binary file ./agent/tools/__pycache__/search_knowledgebase_once.cpython-311.pyc matches
+./agent/tools/search_knowledgebase_once.py:from server.chat.knowledge_base_chat import knowledge_base_chat
+./agent/tools/search_knowledgebase_once.py:    response = await knowledge_base_chat(query=query,
+./agent/tools/search_knowledgebase_once.py:                                         prompt_name="knowledge_base_chat",
+./agent/tools/search_knowledgebase_complex.py:from server.chat.knowledge_base_chat import knowledge_base_chat
+./agent/tools/search_knowledgebase_complex.py:    response = await knowledge_base_chat(query=query,
